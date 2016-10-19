@@ -1,6 +1,4 @@
-dino.h:
-	gcc dino.h -lncurses
-screen.h:
-	gcc screen.h -lncurses
-main.c: dino.h screen.h
+demo: main.o
+	gcc main.o -o demo
+main.o: dino.h screen.h main.c
 	gcc main.c -lncurses
