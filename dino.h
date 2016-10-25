@@ -23,7 +23,7 @@ void print_dino(int pos, int frameno) {
 	mvprintw(y-3, 12, "   |0_|");
 	mvprintw(y-2, 12, "|\\/ |_");
 	mvprintw(y-1, 12, "\\  /");
-	l_type = frameno % 3;
+	l_type = pos == 0 ? frameno % 3 : 9;
 	switch(l_type) {
 		case 0:	mvprintw(y, 12, " | \\");
 			break;
