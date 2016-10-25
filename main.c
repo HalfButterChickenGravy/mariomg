@@ -18,8 +18,9 @@ int main() {
 	clear();
 	while((ch = getch()) != 'q') {
 		clear();
+		disp(i);
 		dino(i--, ch);
-		timeout(100);
+		timeout(70);
 			
 	}
 	endwin();
