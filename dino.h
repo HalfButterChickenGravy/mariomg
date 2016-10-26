@@ -18,7 +18,8 @@ void print_dino(int pos, int frameno) {
 	move(16, 12);
 
 	y = 16 - pos;
-
+	
+	
 	mvprintw(y-4, 12, "    __");
 	mvprintw(y-3, 12, "   |0_|");
 	mvprintw(y-2, 12, "|\\/ |_");
@@ -31,10 +32,11 @@ void print_dino(int pos, int frameno) {
 			break;
 		case 2:	mvprintw(y, 12, " / |");
 			break;
+		case 9: mvprintw(y, 12, " | |");
+			break;
 	}
 
 }
-
 
 
 
