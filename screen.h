@@ -1,4 +1,5 @@
 #include <ncurses.h>
+#include <unistd.h>
 #include "dino.h"
 void disp (int no) {
 
@@ -7,7 +8,6 @@ void disp (int no) {
 	initscr();
 	noecho();
 	curs_set(0);
-	getmaxyx(stdscr, maxheight, maxwidth);
 	
 
 	//ground
@@ -48,32 +48,38 @@ void disp (int no) {
 
 
 
-
 void dino (int no, char key) {
 
-	int i;
+	int i, sum;
 	keypad(stdscr, true);
 	noecho();
 	curs_set(0);
 	
-//12 frames up after jump and 12 frames down after jump
 
 	switch(key) {
-		case KEY_UP: 
-			  for(i = 0; i < 12; i++) {
+		case ' ': {
+			  sum = 100;
+			  for(i = 0; i < 12; i+=4) {
 				clear();
 				disp(no);
-				print_dino(i, no);
+				print_dino(i, no--);
 				refresh();
-				timeout(1000000);
+				usleep(56000);
+				//usleep((5500+(i*(sum+=200))));
+				//usleep(7000);
 			  	
 			  }
-			  for(; i >= 12; i--) {
+			  for(i = 11; i >= 0; i-=4) {
 				clear();
 				disp(no);
-				print_dino(i, no);
+				print_dino(i, no--);
 				refresh();
-				timeout(1000);
+				usleep(56000);
+				//usleep((5500+(i*(sum-=200))));
+				//usleep(7000);
+			  }
+			  
+			  
 			  }
 			  
 	}
@@ -85,144 +91,6 @@ void dino (int no, char key) {
 	print_dino(0, no);
 	refresh();
 
-/*
-	switch(key) {
-		case ' ': print_dino(0, no);
-			  timeout(100);
-			  refresh();
-			  disp(no); 
-			  initscr();
-			  print_dino(1, no);
-			  timeout(100);
-			  refresh();
-			  disp(no); 
-			  initscr();
-			  print_dino(2, no);
-			  timeout(100);
-			  refresh();
-			  disp(no); 
-			  initscr();
-			  print_dino(3, no);
-			  timeout(100);
-			  refresh();
-			  disp(no); 
-			  initscr();
-			  print_dino(4, no);
-			  timeout(100);
-			  refresh();
-			  disp(no); 
-			  initscr();
-			  print_dino(5, no);
-			  timeout(100);
-			  refresh();
-			  disp(no); 
-			  initscr();
-			  print_dino(6, no);
-			  timeout(100);
-			  refresh();
-			  disp(no); 
-			  initscr();
-			  print_dino(7, no);
-			  timeout(100);
-			  refresh();
-			  disp(no); 
-			  initscr();
-			  print_dino(8, no);
-			  timeout(100);
-			  refresh();
-			  disp(no); 
-			  initscr();
-			  print_dino(9, no);
-			  timeout(100);
-			  refresh();
-			  disp(no); 
-			  initscr();
-			  print_dino(10, no);
-			  timeout(100);
-			  refresh();
-			  disp(no); 
-			  initscr();
-			  print_dino(11, no);
-			  timeout(100);
-			  refresh();
-			  disp(no); 
-			  
-			  initscr();
-			  print_dino(10, no);
-			  timeout(100);
-			  refresh();
-			  disp(no); 
-			  initscr();
-			  print_dino(9, no);
-			  timeout(100);
-			  refresh();
-			  disp(no); 
-			  initscr();
-			  print_dino(8, no);
-			  timeout(100);
-			  refresh();
-			  disp(no); 
-			  initscr();
-			  print_dino(7, no);
-			  timeout(100);
-			  refresh();
-			  disp(no); 
-			  initscr();
-			  print_dino(6, no);
-			  timeout(100);
-			  refresh();
-			  disp(no); 
-			  initscr();
-			  print_dino(5, no);
-			  timeout(100);
-			  refresh();
-			  disp(no); 
-			  initscr();
-			  print_dino(4, no);
-			  timeout(100);
-			  refresh();
-			  disp(no); 
-			  initscr();
-			  print_dino(3, no);
-			  timeout(100);
-			  refresh();
-			  disp(no); 
-			  initscr();
-			  print_dino(2, no);
-			  timeout(100);
-			  refresh();
-			  disp(no); 
-			  initscr();
-			  print_dino(1, no);
-			  timeout(100);
-			  refresh();
-			  disp(no); 
-			  initscr();
-			  print_dino(0, no);
-			  timeout(100);
-			  refresh();
-			  disp(no); 
-			  
-			  
-			  
-			  
-	}
-*/
-
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
