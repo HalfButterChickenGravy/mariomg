@@ -3,7 +3,7 @@
 #include <limits.h>
 #include <pthread.h>
 #include "gamedata.h"
-
+#include "screen.h"
 
 void *dino_runner (void *arg) {
 	player *p = (player*) arg;
@@ -42,6 +42,7 @@ int main() {
 	curs_set(0);
 	clear();
 	player *p;
+	
 	initgame(p);
 	initobs(p->o);
 
@@ -58,4 +59,5 @@ int main() {
 	
 	pthread_join(t_obs, NULL);
 	endwin();
+	return 0;
 }
