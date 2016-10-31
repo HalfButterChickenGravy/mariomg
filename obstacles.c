@@ -2,6 +2,7 @@
 #include <ncurses.h>
 #include <stdlib.h>
 #include "gamedata.h"
+#include "obstacles.h"
 
 void initobs(obstacle *tree) {
 
@@ -274,7 +275,6 @@ int addobsctacles (player *p) {
 	}
 	return 1;
 }
-
 
 
 
