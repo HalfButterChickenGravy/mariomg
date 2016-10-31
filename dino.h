@@ -2,15 +2,6 @@
 #include <stdio.h>
 
 
-
-
-typedef struct player {
-	int score;
-//	p_character type;	
-	
-}player;
-
-
 void print_dino(int pos, int frameno) {
 
 	int l_type, y;
