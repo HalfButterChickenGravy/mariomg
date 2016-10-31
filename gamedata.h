@@ -2,8 +2,6 @@
 #define __GAMEDATA_H
 
 #include "screen.h"
-#include "obstacles.h"
-
 typedef struct player {
 	int score;
 	int i; //reverseframeno
@@ -15,7 +13,7 @@ typedef struct player {
 	
 } player;
 
-
+#include "obstacles.h"
 
 void initgame(player *p);
 
