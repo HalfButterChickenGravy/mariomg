@@ -2,6 +2,8 @@
 #define __OBSTACLES_H
 
 #include <string.h>
+#include "gamedata.h"
+
 
 typedef struct obstacle {
 	char shape[5][10];
@@ -9,5 +11,11 @@ typedef struct obstacle {
 	int pcount;
 	int height;
 } obstacle;
+
+void initobs(obstacle *tree);
+void printobstacle (obstacle *x, int obsloc);
+int checkcollision (obstacle *x, int obsloc, int dinopos);
+int addobsctacles (player *p);
+
 
 #endif
