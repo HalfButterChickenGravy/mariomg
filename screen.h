@@ -1,7 +1,6 @@
-#ifndef __GAMEDATA_H
-#define __GAMEDATA_H
+#ifndef __SCREEN_H
+#define __SCREEN_H
 
-#include "dino.h"
 #include "gamedata.h"
 
 void print_dino(int pos, int frameno);
