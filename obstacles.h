@@ -15,7 +15,7 @@ typedef struct obstacle {
 void initobs(obstacle *tree);
 void printobstacle (obstacle *x, int obsloc);
 int checkcollision (obstacle *x, int obsloc, int dinopos);
-int addobsctacles (player *p);
+int addobstacles (player *p);
 
 
 #endif
