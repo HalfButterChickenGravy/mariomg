@@ -7,7 +7,5 @@ screen: screen.h screen.c gamedata.h obstacles.h
 	gcc screen.c -lncurses -Wall
 obstacles: obstacles.h obstacles.c gamedata.h
 	gcc obstacles.c -lncurses -Wall
-gamedata: gamedata.c obstacles.h
-	gcc gamedata.c -Wall
 clean: 
 	rm *.o
