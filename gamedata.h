@@ -1,7 +1,7 @@
 #ifndef __GAMEDATA_H
 #define __GAMEDATA_H
 
-#include "screen.h"
+
 typedef struct obstacle obstacle;
 
 typedef struct player {
@@ -14,10 +14,8 @@ typedef struct player {
 //	p_character type;	
 	
 } player;
-
+#include "screen.h"
 #include "obstacles.h"
-
-void initgame(player *p);
 
 
 
