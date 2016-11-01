@@ -261,7 +261,7 @@ int checkcollision (obstacle *x, int obsloc, int dinopos) {
 	return 0;
 }
 
-int addobsctacles (player *p) {
+int addobstacles (player *p) {
 	
 
 	int type, i;		
