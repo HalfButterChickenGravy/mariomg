@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <limits.h>
 #include <pthread.h>
+#include <stdlib.h>
 #include "gamedata.h"
 #include "screen.h"
 
@@ -22,7 +23,7 @@ void *dino_runner (void *arg) {
 
 void *obs_runner (void *arg) {
 	player *p = (player*) arg;
-	if(p->score % 150 == 0) {
+	if(p->score % 50 == 0) {
 		addobstacles(p);
 
 	}
@@ -43,7 +44,9 @@ int main() {
 	clear();
 	player *p;
 	
-	initgame(p);
+	p = (player*) malloc(sizeof(player));
+	p->score = 0;	
+	p->i = INT_MAX;
 	initobs(p->o);
 
 	pthread_t t_dino, t_obs;
@@ -55,9 +58,10 @@ int main() {
 	pthread_create(&t_dino, &attr, dino_runner, p);
 
 	//obsrunner
-	pthread_create(&t_obs, &attr, obs_runner, p);
+//	pthread_create(&t_obs, &attr, obs_runner, p);
 	
-	pthread_join(t_obs, NULL);
+	pthread_join(t_dino, NULL);
+//	pthread_join(t_obs, NULL);
 	endwin();
 	return 0;
 }
