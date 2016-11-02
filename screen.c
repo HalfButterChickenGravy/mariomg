@@ -1,3 +1,16 @@
+/* mariomg -- A simple implementation of offline dino runner game of Google Chrome in c
+   Copyright pratikmayekar4@gmail.com Pratik Mayekar
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
+
 #include <ncurses.h>
 #include <unistd.h>
 #include "gamedata.h"
@@ -56,11 +69,6 @@ void print_dino(int pos, int frameno) {
 \  /
  | |
 
-
-  O
- /|\
- / \
-
  */
 
 
@@ -107,8 +115,9 @@ void disp (player *p) {
 		addch(bord);addch(bord);
 	}
 
-	//mvprintw(1, 88, "Score: %d", p->score);
-	mvprintw(1, 3, "Score: %d", p->score);
+	mvprintw(2, 88, "Score: %d", p->score);
+	mvprintw(3, 88, " Best: %d", p->best);
+	mvprintw(2, 3, "'q' to quit");
 	refresh();
 
 }
@@ -119,7 +128,6 @@ void disp (player *p) {
 
 void dino (player *p) {
 
-	int no = p->i;
 	char key = p->ch;
 	int i;
 	keypad(stdscr, true);
@@ -129,26 +137,44 @@ void dino (player *p) {
 
 	switch(key) {
 		case ' ': {
-			  for(i = 0; i < 12; i+=4) {
-				//clear();
-				//sum=100;
-				i = p->dinopos;
+			  for(i = 0; i < 10; i+=1) {
+				p->score++;				
+				clear();
+				p->dinopos = i;
 				disp(p);
-				print_dino(i, no--);
+				print_dino(i, p->i--);
+
+				assignobs(p);	
+				if(p->obsloc >= 0) {
+					printobstacle(&p->o[p->obstype], p->obsloc);
+					if(checkcollision(&p->o[p->obstype], i, p->dinopos)) {
+						p->state = 0;
+						refresh();
+						return;
+					}				
+				}
 				refresh();
-				usleep(56000);
-				//usleep((5500+(i*(sum+=200))));
-				//usleep(7000);
+				usleep(p->speed * 1000);
 			  	
 			  }
-			  for(i = 11; i >= 0; i-=4) {
-				//clear();
+			  for(i = 9; i >= 0; i-=1) {
+				p->score++;				
+				clear();
+				p->dinopos = i;
 				disp(p);
-				print_dino(i, no--);
+				print_dino(i, p->i--);
+
+				assignobs(p);	
+				if(p->obsloc >= 0) {
+					printobstacle(&p->o[p->obstype], p->obsloc);
+					if(checkcollision(&p->o[p->obstype], p->obsloc, p->dinopos)) {
+						p->state = 0;
+						refresh();
+						return;
+					}				
+				}
 				refresh();
-				usleep(56000);
-				//usleep((5500+(i*(sum-=200))));
-				//usleep(7000);
+				usleep(p->speed * 1000);
 			  }
 			  
 			  
@@ -158,23 +184,21 @@ void dino (player *p) {
 
 
 	//dino
-	//clear();
+	p->score++;
+	clear();
 	disp(p);
-	print_dino(0, no);
+	print_dino(0, p->i);
+
+	assignobs(p);	
+	if(p->obsloc >= 0) {
+		printobstacle(&p->o[p->obstype], p->obsloc);
+		if(checkcollision(&p->o[p->obstype], p->obsloc, p->dinopos)) {
+			p->state = 0;
+			refresh();
+			return;
+		}				
+	}
 	refresh();
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
