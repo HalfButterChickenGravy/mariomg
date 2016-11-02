@@ -1,12 +1,26 @@
+/* mariomg -- A simple implementation of offline dino runner game of Google Chrome in c
+   Copyright pratikmayekar4@gmail.com Pratik Mayekar
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
+
 #include <time.h>
 #include <ncurses.h>
 #include <stdlib.h>
 #include "gamedata.h"
 #include "obstacles.h"
 
-void initobs(obstacle *tree) {
+void initobs(player *p) {
 
-tree = (obstacle *) malloc(5 * sizeof(obstacle));
+obstacle tree[5];
+int i;
 
 ///////////////////////////////////////////////////////////////////////////////////////
 //Obstacle types (NO_OF_OBS)
@@ -217,7 +231,10 @@ tree[4].p[15] = 2;
 
 //Obstacle types end
 ///////////////////////////////////////////////////////////////////////////////////////
+p->o = (obstacle *) malloc(5 * sizeof(obstacle));
 
+for(i = 0; i < 5; i++)
+	p->o[i] = tree[i];
 
 }
 
@@ -229,8 +246,7 @@ void printobstacle (obstacle *x, int obsloc) {
 	initscr();
 	noecho();
 	curs_set(0);
-	for(i = 0; i < x->height; i++) {
-		y = 16 - i;
+	for(i = 0, y = 17 - x->height; i < x->height; i++, y++) {
 		mvprintw(y, obsloc, x->shape[i]);
 	}
 	refresh();
@@ -252,7 +268,7 @@ int checkcollision (obstacle *x, int obsloc, int dinopos) {
 	
 	for(i = 0; i < x->pcount + 7; i++) {
 		if(state == i) {
-			if(dinopos <= x->p[state])
+			if(dinopos <= x->p[state] )
 				return 1;
 			
 		}
@@ -261,27 +277,20 @@ int checkcollision (obstacle *x, int obsloc, int dinopos) {
 	return 0;
 }
 
-int addobstacles (player *p) {
+void assignobs (player *p) {
 	
-
-	int type, i;		
-	srand(time(NULL));		
-	type = p->score > 300 ? rand() % 5 : rand() % 3 ;
-	for(i = 99; i >= 0; i--) {
-		printobstacle(&p->o[type], i);
-		timeout(70);
-		if(checkcollision(&p->o[type], i, p->dinopos))
-			return 0;
-	}
-	return 1;
+	if(p->score % 200 == 0 && p->score != 0) {
+		if(p->score < 1000)
+			p->obstype = rand() % 3 ;
+		else if(p->score >= 1000)			
+			p->obstype = rand() % 5 ;
+		p->obsloc = 99;
+	}	
+	else {
+		p->obsloc--;
+	}	
+	
 }
-
-
-
-
-
-
-
 
 
 
