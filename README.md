@@ -1,6 +1,5 @@
 # mariomg
 GOOGLE CHROME'S OFFLINE DINO RUNNER GAME IN C
-
 Pratik Mayekar 111503055
 
 This is a version of the popular Dinosaur runner game of Google Chrome.
