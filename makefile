@@ -1,5 +1,5 @@
 all: project
-project: gamedata.o screen.o obstacles.o main.o
+project: screen.o obstacles.o main.o
 	gcc screen.c obstacles.c main.c -lncurses -pthread -o project -Wall
 main: screen.h gamedata.h obstacles.h
 	gcc main.c -o main -lncurses -Wall
